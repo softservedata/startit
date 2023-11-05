@@ -11,9 +11,9 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import java.time.Duration;
 
 public class SeleniumFirstTest {
-    private static WebDriver driver;
+    //private static WebDriver driver;
 
-    @BeforeAll
+    //@BeforeAll
     public static void setup() {
         //WebDriverManager.chromedriver().setup();
         //driver = new ChromeDriver();
@@ -24,12 +24,12 @@ public class SeleniumFirstTest {
         driver.manage().window().maximize();
     }
 
-    @AfterAll
+    //@AfterAll
     public static void tear() {
         driver.quit();
     }
 
-    @BeforeEach
+    //@BeforeEach
     public void setupThis() {
         //driver.get("https://demo.opencart.com/index.php");
         driver.navigate().to("https://demo.opencart.com/index.php");
@@ -37,8 +37,17 @@ public class SeleniumFirstTest {
 
     @Test
     public void testSmoke() {
+        driver = new HtmlUnitDriver(false);
+        //
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // 0 by default
+        driver.manage().window().maximize();
+        //
+        driver.navigate().to("https://demo.opencart.com/index.php");
+        //
         WebElement search = driver.findElement(By.name("search"));
         System.out.println("search: " + search.isDisplayed());
         Assertions.assertTrue(search.isDisplayed());
+        //
+        driver.quit();
     }
 }
